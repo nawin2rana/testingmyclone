@@ -1,0 +1,70 @@
+https://mvnrepository.com/artifact/ai.foremast.metrics/foremast-spring-4x-adoption/0.1.6
+
+<!-- https://mvnrepository.com/artifact/ai.foremast.metrics/foremast-spring-4x-adoption -->
+<dependency>
+    <groupId>ai.foremast.metrics</groupId>
+    <artifactId>foremast-spring-4x-adoption</artifactId>
+    <version>0.1.6</version>
+</dependency>
+
+
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+
+
+https://github.com/intuit/foremast/tree/master/foremast-metrics/foremast-spring-4x-k8s-metrics
+
+https://github.com/intuit/foremast/tree/master/foremast-metrics/foremast-spring-4x-k8s-metrics/src/main/resources
+
+
+<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			classpath:foremast-spring-4x-k8s-metrics.xml
+		</param-value>
+	</context-param>
+	
+	<!-- ... -->
+    <filter>
+        <filter-name>HttpServerMetrics</filter-name>
+        <filter-class>ai.foremast.micrometer.web.servlet.WebMvcMetricsFilter</filter-class>
+        <init-param>
+            <param-name>prometheus-path</param-name>
+            <param-value>/actuator/prometheus</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>HttpServerMetrics</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
+Enable metrics through configuration
+By default almost all the Spring Boot Actuator HTTP endpoints are disabled, but can be enabled through configuration. Add the following line to your application.properties file in the src/main/resources folder of your project:
+
+management.endpoints.web.exposure.include=metrics,prometheus
+The actuator module has many endpoints that can be enabled, but this configuration enables just two:
+
+the /actuator/metrics endpoint which provides a JSON API for navigating your metrics and viewing their values
+the /actuator/prometheus endpoint which returns the metrics in the custom format required for ingesting into Prometheus. This is the format we’ll be talking about in rest of this article.
+
+
+
+https://www.theserverside.com/tutorial/How-to-Use-Spring-30-In-a-Servlet-Based-Web-Application
+
+<listener>
+   <listener-class>
+    org.springframework.web.context.ContextLoaderListener
+   </listener-class>
+ </listener>
+ 
+
+
+https://www.callicoder.com/spring-boot-actuator-metrics-monitoring-dashboard-prometheus-grafana/
+
+ 
+https://www.theserverside.com/tutorial/How-to-Use-Spring-30-In-a-Servlet-Based-Web-Application
